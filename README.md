@@ -77,14 +77,14 @@ We're using Next.js 14's App Router for improved routing and layouts:
    - Allows filtering by category or tag.
 
    ![Blog Listing Page]
-   <img width="1439" alt="blogs" src="https://github.com/user-attachments/assets/3358e90c-3b55-4f07-87d1-eb39b0b3ba0a">
+   <img width="1439" alt="blog listing 2024-09-17 at 13 35 14" src="https://github.com/user-attachments/assets/01181c9c-af07-4289-97de-ddce6f2f9c05">
 
-2. Blog Post Detail (`app/blog/[slug]/page.js`):
+3. Blog Post Detail (`app/blog/[slug]/page.js`):
    - Shows full content of a single blog post.
    - Displays comments and allows adding new comments.
    - Implements dynamic OG image generation for social sharing.
 
-3. Create/Edit Post (`app/blog/create/page.js`):
+4. Create/Edit Post (`app/blog/create/page.js`):
    - Form for creating new blog posts or editing existing ones.
    - Implements rich text editing.
 
