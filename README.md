@@ -4,7 +4,8 @@
 
 This repository contains the final project for the UICT React Mentorship Class of 2024. It's a modern, full-featured blog platform built using Next.js 14 with App Router, Tailwind CSS, and Sanity CMS.
 
-![UICT Blog Home Page](https://i.imgur.com/your-image-url-here.png)
+![UICT Blog Home Page]
+<img width="1439" alt="home" src="https://github.com/user-attachments/assets/00c41cfd-7454-4f62-8604-d6af59814c96">
 
 ## Features
 
@@ -85,24 +86,6 @@ We're using Next.js 14's App Router for improved routing and layouts:
 3. Create/Edit Post (`app/blog/create/page.js`):
    - Form for creating new blog posts or editing existing ones.
    - Implements rich text editing.
-
-### Authentication
-
-- Login (`app/(auth)/login/page.js`) and Register (`app/(auth)/register/page.js`) pages.
-- Uses NextAuth.js for authentication (`app/api/auth/[...nextauth]/route.js`).
-
-### API Routes
-
-- Posts API (`app/api/posts/route.js`): Handles CRUD operations for blog posts.
-- Comments API (`app/api/comments/route.js`): Manages comment functionality.
-
-### Search Functionality
-
-- Search Page (`app/search/page.js`): Implements full-text search across blog posts.
-
-### User Profile
-
-- Profile Page (`app/profile/page.js`): Allows users to view and edit their profile information.
 
 ## Sanity CMS Integration
 
@@ -199,7 +182,8 @@ This project is a collaborative effort by UICT students. Please refer to CONTRIB
 <img width="1439" alt="blogs" src="https://github.com/user-attachments/assets/3358e90c-3b55-4f07-87d1-eb39b0b3ba0a">
 
 ### Home Page
-![Home Page]<img width="1439" alt="home" src="https://github.com/user-attachments/assets/00c41cfd-7454-4f62-8604-d6af59814c96">
+![Home Page]
+<img width="1439" alt="home" src="https://github.com/user-attachments/assets/00c41cfd-7454-4f62-8604-d6af59814c96">
 
 ## Acknowledgements
 
