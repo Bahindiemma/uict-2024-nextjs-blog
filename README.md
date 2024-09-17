@@ -210,6 +210,15 @@ pnpm dev
 bun dev
 ```
 
+## Make sure you have this .env.local file in your project root
+
+```bash
+NEXT_PUBLIC_SANITY_API_VERSION="2024-09-01"
+NEXT_PUBLIC_SANITY_PROJECT_ID="jqw9smb7"
+NEXT_PUBLIC_SANITY_DATASET="production"
+NEXT_PUBLIC_BASE_URL=https://uict-students-nextjs14-blog.sanity.studio/
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
