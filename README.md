@@ -76,7 +76,8 @@ We're using Next.js 14's App Router for improved routing and layouts:
    - Implements pagination.
    - Allows filtering by category or tag.
 
-   ![Blog Listing Page](https://i.imgur.com/your-image-url-here.png)
+   ![Blog Listing Page]
+   <img width="1439" alt="blogs" src="https://github.com/user-attachments/assets/3358e90c-3b55-4f07-87d1-eb39b0b3ba0a">
 
 2. Blog Post Detail (`app/blog/[slug]/page.js`):
    - Shows full content of a single blog post.
