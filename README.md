@@ -2,7 +2,9 @@
 
 ## Project Overview
 
-This repository contains the final project for the UICT React Mentorship Class of 2024. It's a modern, full-featured blog platform built using Next.js 14 with App Router, Tailwind CSS, and MongoDB.
+This repository contains the final project for the UICT React Mentorship Class of 2024. It's a modern, full-featured blog platform built using Next.js 14 with App Router, Tailwind CSS, and Sanity CMS.
+
+![UICT Blog Home Page](https://i.imgur.com/your-image-url-here.png)
 
 ## Features
 
@@ -17,7 +19,7 @@ This repository contains the final project for the UICT React Mentorship Class o
 
 - Frontend: Next.js 14 (App Router), React, Tailwind CSS
 - Backend: Next.js API Routes
-- Database: MongoDB
+- Content Management: Sanity CMS
 - Authentication: NextAuth.js
 - Deployment: Vercel (recommended)
 
@@ -26,50 +28,35 @@ This repository contains the final project for the UICT React Mentorship Class o
 ```
 /
 ├── app/
-│   ├── (auth)/
-│   │   ├── login/
-│   │   │   └── page.js
-│   │   ├── register/
-│   │   │   └── page.js
-│   │   └── layout.js
 │   ├── blog/
 │   │   ├── [slug]/
 │   │   │   └── page.js
 │   │   ├── create/
+│   │   │   └── page.tsx
+│   │   └── page.tsx
+│   ├── about/
 │   │   │   └── page.js
-│   │   └── page.js
-│   ├── api/
-│   │   ├── auth/
-│   │   │   └── [...nextauth]/
-│   │   │       └── route.js
-│   │   ├── posts/
-│   │   │   └── route.js
-│   │   └── comments/
-│   │       └── route.js
-│   ├── search/
-│   │   └── page.js
-│   ├── profile/
-│   │   └── page.js
-│   ├── layout.js
-│   └── page.js
+│   ├── contact/
+│   │   │   └── page.js
+│   │   └── page.tsx
 ├── components/
-│   ├── Header.js
-│   ├── Footer.js
-│   ├── PostCard.js
-│   ├── CommentSection.js
-│   └── SearchBar.js
+│   ├── Header.tsx
+│   ├── Footer.tsx
+│   ├── PostCard.tsx
 ├── lib/
-│   ├── mongodb.js
-│   └── auth.js
-├── models/
-│   ├── User.js
-│   ├── Post.js
-│   └── Comment.js
+│   ├── sanity.ts
+│   └── interface.ts
+├── sanity/
+│   ├── schemas/
+│   │   ├── post.js
+│   │   ├── author.js
+│   │   └── comment.js
+│   └── sanity.config.ts
 ├── public/
 ├── styles/
 │   └── globals.css
-├── next.config.js
-└── tailwind.config.js
+├── next.config.ts
+└── tailwind.config.ts
 ```
 
 ## Key Components and Pages
@@ -87,6 +74,8 @@ We're using Next.js 14's App Router for improved routing and layouts:
    - Displays a list of blog posts.
    - Implements pagination.
    - Allows filtering by category or tag.
+
+   ![Blog Listing Page](https://i.imgur.com/your-image-url-here.png)
 
 2. Blog Post Detail (`app/blog/[slug]/page.js`):
    - Shows full content of a single blog post.
@@ -115,41 +104,29 @@ We're using Next.js 14's App Router for improved routing and layouts:
 
 - Profile Page (`app/profile/page.js`): Allows users to view and edit their profile information.
 
-## MongoDB Connection
+## Sanity CMS Integration
 
-We use MongoDB for our database. The connection is set up in `lib/mongodb.js`:
+We use Sanity CMS for content management. The connection is set up in `lib/sanity.js`:
 
 ```javascript
-import { MongoClient } from 'mongodb';
+import { createClient } from "next-sanity";
+import imageUrlBuilder from "@sanity/image-url";
 
-const uri = process.env.MONGODB_URI;
-const options = {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-};
+export const client = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  apiVersion: "2021-10-21",
+  useCdn: process.env.NODE_ENV === "production",
+});
 
-let client;
-let clientPromise;
+const builder = imageUrlBuilder(client);
 
-if (!process.env.MONGODB_URI) {
-  throw new Error('Please add your Mongo URI to .env.local');
+export function urlFor(source) {
+  return builder.image(source);
 }
-
-if (process.env.NODE_ENV === 'development') {
-  if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, options);
-    global._mongoClientPromise = client.connect();
-  }
-  clientPromise = global._mongoClientPromise;
-} else {
-  client = new MongoClient(uri, options);
-  clientPromise = client.connect();
-}
-
-export default clientPromise;
 ```
 
-This setup ensures efficient connection reuse across serverless function invocations.
+This setup allows efficient content management and delivery through Sanity's CDN.
 
 ## Getting Started
 
@@ -157,7 +134,7 @@ This setup ensures efficient connection reuse across serverless function invocat
 
 - Node.js (v14 or later)
 - npm or yarn
-- MongoDB instance
+- Sanity account
 
 ### Installation
 
@@ -178,7 +155,8 @@ This setup ensures efficient connection reuse across serverless function invocat
 
 4. Create a `.env.local` file in the root directory and add your environment variables:
    ```
-   MONGODB_URI=your_mongodb_connection_string
+   NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
+   NEXT_PUBLIC_SANITY_DATASET=your_sanity_dataset
    NEXTAUTH_SECRET=your_nextauth_secret
    ```
 
@@ -203,7 +181,25 @@ This project is a collaborative effort by UICT students. Please refer to CONTRIB
 - Joseph - Blog Post Management
 - Timo - Frontend Design and UI/UX
 - Okot Emmanuel - Comments and Interaction
+
 - Debbie - Categories, Tags, and Search
+
+## Screenshots
+
+### Contact Page
+![Contact Page]
+<img width="1439" alt="contact" src="https://github.com/user-attachments/assets/0caa9b08-7c13-4fd0-95de-81c878ea8710">
+
+### About Page
+![About Page]
+<img width="1439" alt="about" src="https://github.com/user-attachments/assets/ab5c4109-a32f-4e31-8da6-169eaa985458">
+
+### Blog Listing Page
+![Blog Listing Page]
+<img width="1439" alt="blogs" src="https://github.com/user-attachments/assets/3358e90c-3b55-4f07-87d1-eb39b0b3ba0a">
+
+### Home Page
+![Home Page]<img width="1439" alt="home" src="https://github.com/user-attachments/assets/00c41cfd-7454-4f62-8604-d6af59814c96">
 
 ## Acknowledgements
 
